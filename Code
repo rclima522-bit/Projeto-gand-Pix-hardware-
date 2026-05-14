@@ -1,0 +1,65 @@
+int sensorD = 8;
+int sensorM = 7;
+int sensorE = 6;
+int ledD = 10;
+int ledM = 11;
+int ledE = 12;
+int buzzer = 9;
+
+
+void setup() {
+  pinMode(sensorD, INPUT);
+  pinMode(sensorM, INPUT);
+  pinMode(sensorE, INPUT);
+  Serial.begin(9600);
+  pinMode(ledE, OUTPUT);
+  pinMode(ledM, OUTPUT);
+  pinMode(ledD, OUTPUT);
+  pinMode(buzzer, OUTPUT);
+}
+
+void loop() {
+  int VsensorD = digitalRead(sensorD);
+  int VsensorM = digitalRead(sensorM);
+  int VsensorE = digitalRead(sensorE);
+  //sensor direita//
+  Serial.print("SENSOR DIREITA: ");
+  Serial.println(VsensorD);
+  //sensor meio//
+  Serial.print("SENSOR MEIO: ");
+  Serial.println(VsensorM);
+  //sensor esquerda//
+  Serial.print("SENSOR ESQUERDA: ");
+  Serial.println(VsensorE);
+  Serial.println("******************");
+  delay(500);
+
+  if(VsensorE == 0 && VsensorM==1 && VsensorD==1){
+    digitalWrite(ledE,1);
+    digitalWrite(ledM,0);
+    digitalWrite(ledD,0);
+    digitalWrite(buzzer,1);
+    delay(500);
+  }
+   if(VsensorE == 1 && VsensorM==0 && VsensorD==1){
+    digitalWrite(ledE,0);
+    digitalWrite(ledM,1);
+    digitalWrite(ledD,0);
+    digitalWrite(buzzer,0);
+        delay(500);
+
+  }
+   if(VsensorE == 1 && VsensorM==1 && VsensorD==0){
+    digitalWrite(ledE,0);
+    digitalWrite(ledM,0);
+    digitalWrite(ledD,1);
+    digitalWrite(buzzer,1);
+        delay(500);
+
+  }else{
+    digitalWrite(ledE,0);
+    digitalWrite(ledM,0);
+    digitalWrite(ledD,0);
+    digitalWrite(buzzer,0);
+  }
+}
